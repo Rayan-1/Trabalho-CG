@@ -42,21 +42,20 @@ void Player::draw() {
     glEnd();
     glPopMatrix();
 }
-
 void Player::moveLeft() {
-    // Implementação para mover para a esquerda
+    positionX -= speed;
 }
 
 void Player::moveRight() {
-    // Implementação para mover para a direita
+    positionX += speed;
 }
 
 void Player::moveUp() {
-    // Implementação para mover para cima
+    positionY -= speed;
 }
 
 void Player::moveDown() {
-    // Implementação para mover para baixo
+    positionY += speed;
 }
 
 
