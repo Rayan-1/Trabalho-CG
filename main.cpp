@@ -1,12 +1,14 @@
 #include <GL/freeglut.h>
+#include <GL/glut.h>
 #include "player.h"
 #include "enemy.h"
 #include "powerUp.h"
 #include "score.h"
+#include "input.h"
 
 Player player;
-Enemy enemy;
-PowerUp powerUp;
+PowerUp powerUp(player);
+Enemy enemy(player);
 Score score;
 
 void drawObjects() {
@@ -51,7 +53,6 @@ void keyboard(unsigned char key, int x, int y) {
     }
 }
 
-
 void idle() {
     int windowWidth = glutGet(GLUT_WINDOW_WIDTH);
     int windowHeight = glutGet(GLUT_WINDOW_HEIGHT);
@@ -64,15 +65,15 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(800, 600);
     glutCreateWindow("Rei da Pradaria");
-    
+
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutKeyboardFunc(keyboard);
     glutIdleFunc(idle);
-    
-    glClearColor(0.0, 0.0, 0.0, 1.0);
-    
+
+    glClearColor(0.0, 1.0, 0.0, 1.0);
+
     glutMainLoop();
-    
+
     return 0;
 }
