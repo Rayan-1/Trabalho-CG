@@ -169,3 +169,11 @@ Além disso, há uma indicação de que pode haver outras variáveis e métodos 
 
 1. A função `KeyIsPressed` utiliza a função `glfwGetKey` da biblioteca GLFW para obter o estado da tecla especificada pelo parâmetro `key`. 
 2. Se o estado da tecla for `GLFW_PRESS` ou `GLFW_REPEAT`, a função retorna `true`, indicando que a tecla está pressionada. Caso contrário, ela retorna `false`.
+
+
+
+#Copilando e rodando no linux
+
+g++ -o programa main.cpp enemy.cpp player.cpp powerUp.cpp score.cpp -lGL -lGLU -lglut
+
+./programa
