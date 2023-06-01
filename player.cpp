@@ -1,6 +1,6 @@
 #include "player.h"
 #include "input.h"
-#include <GLFW/glfw3.h>
+#include <GL/glut.h> // Inclua a biblioteca correta para usar o GLUT
 
 Player::Player() {
     positionX = 0;
@@ -34,6 +34,7 @@ void Player::update(int windowWidth, int windowHeight) {
 void Player::draw() {
     glPushMatrix();
     glTranslatef(positionX, positionY, 0.0f);
+    glColor3f(0.0f, 0.0f, 0.0f); // Define a cor preta
     glBegin(GL_QUADS);
     glVertex2f(0.0f, 0.0f);
     glVertex2f(width, 0.0f);
@@ -41,7 +42,10 @@ void Player::draw() {
     glVertex2f(0.0f, height);
     glEnd();
     glPopMatrix();
+    
+
 }
+
 void Player::moveLeft() {
     positionX -= speed;
 }
@@ -57,14 +61,14 @@ void Player::moveUp() {
 void Player::moveDown() {
     positionY += speed;
 }
-
-
-bool Input::KeyIsPressed(int key) {
-    // Implementação da função
-
-    // Adicione seu código aqui
-
-    // Retorne um valor (verdadeiro ou falso) com base na entrada da tecla
-    return true; // Substitua pela sua implementação
+float Player::getPositionX() const {
+    return positionX;
 }
 
+float Player::getPositionY() const {
+    return positionY;
+}
+
+bool Input::KeyIsPressed(int key) {
+    return glutGet(GLUT_KEY_UP) == key || glutGet(GLUT_KEY_DOWN) == key || glutGet(GLUT_KEY_LEFT) == key || glutGet(GLUT_KEY_RIGHT) == key;
+}
