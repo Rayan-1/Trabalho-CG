@@ -22,6 +22,11 @@ void Level::update() {
     // Lógica para atualizar o estado dos inimigos, power-ups e outros elementos do nível
     for (auto& enemy : enemies) {
         enemy.update();
+
+        // Verificar colisão entre jogador e inimigo
+        if (checkCollision(player, enemy)) {
+            // Lógica para tratar a colisão
+            player.handleCollision();
     }
 
     for (auto& powerUp : powerUps) {
@@ -29,6 +34,34 @@ void Level::update() {
     }
 
     // Lógica para verificar colisões, pontuação, etc.
+    if (checkCollision(player, powerUp)) {
+            // Lógica para tratar a colisão
+            player.handlePowerUpCollision(powerUp);
+            // Remover o power-up do vetor de power-ups, se necessário
+            // powerUps.erase(std::remove(powerUps.begin(), powerUps.end(), powerUp), powerUps.end());
+        }
+}
+
+bool Level::checkCollision(const Player& player, const GameObject& object) {
+    // Lógica para verificar se ocorreu uma colisão entre o jogador e o objeto
+    // Retorne true se houver colisão e false caso contrário
+
+    // Exemplo simples: verificando se os retângulos de colisão se sobrepõem
+    float playerLeft = player.getX();
+    float playerRight = player.getX() + player.getWidth();
+    float playerTop = player.getY();
+    float playerBottom = player.getY() + player.getHeight();
+
+    float objectLeft = object.getX();
+    float objectRight = object.getX() + object.getWidth();
+    float objectTop = object.getY();
+    float objectBottom = object.getY() + object.getHeight();
+
+    if (playerRight >= objectLeft && playerLeft <= objectRight && playerBottom >= objectTop && playerTop <= objectBottom) {
+        return true;
+    }
+
+    return false;
 }
 
 void Level::draw() {
